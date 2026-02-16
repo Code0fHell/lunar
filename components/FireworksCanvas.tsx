@@ -21,7 +21,7 @@ export default function FireworksCanvas(){
 
     engineRef.current = engine;
 
-    engine.loop(0);
+    engine.loop();
 
     const click = (e:MouseEvent)=>{
       engine.spawnFirework(e.clientX,e.clientY,"Chúc mừng năm mới 🎆");
