@@ -1,33 +1,40 @@
 import { Firework } from "./Firework";
 
-export class Engine{
+export class Engine {
 
- fireworks=[];
+  fireworks: Firework[] = [];
 
- constructor(public ctx){}
+  constructor(public ctx: CanvasRenderingContext2D) {}
 
- spawnRandom(){
+  // ⭐ spawn random auto fireworks
+  spawnRandom() {
+    this.fireworks.push(
+      new Firework(
+        Math.random() * window.innerWidth,
+        Math.random() * window.innerHeight / 2,
+      )
+    );
+  }
 
-   this.fireworks.push(
-     new Firework(
-       Math.random()*window.innerWidth,
-       Math.random()*window.innerHeight/2
-     )
-   );
- }
+  // ⭐ spawn khi click (FIX lỗi của bạn)
+  spawnFirework(x:number,y:number,text?:string){
+    this.fireworks.push(
+      new Firework(x,y)
+    );
+  }
 
- loop=()=>{
+  loop = () => {
 
-   this.ctx.fillStyle="rgba(0,0,0,0.2)";
-   this.ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
+    this.ctx.fillStyle="rgba(0,0,0,0.2)";
+    this.ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
 
-   if(Math.random()<0.05){
-     this.spawnRandom();
-   }
+    if(Math.random() < 0.05){
+      this.spawnRandom();
+    }
 
-   this.fireworks.forEach(f=>f.update());
-   this.fireworks.forEach(f=>f.render(this.ctx));
+    this.fireworks.forEach(f => f.update());
+    this.fireworks.forEach(f => f.render(this.ctx));
 
-   requestAnimationFrame(this.loop);
- }
+    requestAnimationFrame(this.loop);
+  }
 }

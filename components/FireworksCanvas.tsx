@@ -6,8 +6,6 @@ import { Engine } from "../engine/Engine";
 export default function FireworksCanvas(){
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const engineRef = useRef<Engine | null>(null);
-
 
   useEffect(()=>{
 
@@ -19,12 +17,14 @@ export default function FireworksCanvas(){
 
     const engine = new Engine(ctx);
 
-    engineRef.current = engine;
-
     engine.loop();
 
     const click = (e:MouseEvent)=>{
-      engine.spawnFirework(e.clientX,e.clientY,"Chúc mừng năm mới 🎆");
+      engine.spawnFirework(
+        e.clientX,
+        e.clientY,
+        "Chúc mừng năm mới 🎆"
+      );
     };
 
     window.addEventListener("click",click);
@@ -33,5 +33,10 @@ export default function FireworksCanvas(){
 
   },[]);
 
-  return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full"/>
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed top-0 left-0 w-full h-full pointer-events-none"
+    />
+  )
 }

@@ -1,13 +1,12 @@
 import { Particle } from "./Particle";
 
-export class Firework{
+export class Firework {
 
- particles=[];
+  particles: Particle[] = [];
 
- constructor(public x,public y){
-
-   this.createShape();
- }
+  constructor(public x:number, public y:number){
+    this.createShape();
+  }
 
  createShape(){
 
@@ -22,9 +21,12 @@ export class Firework{
        const speed=Math.random()*5;
 
        this.particles.push(
-         new Particle(this.x,this.y,
-           Math.cos(angle)*speed,
-           Math.sin(angle)*speed)
+         new Particle(
+           this.x,
+           this.y,
+           Math.cos(angle) * speed,
+           Math.sin(angle) * speed
+         ) as Particle  
        );
      }
 
@@ -36,7 +38,7 @@ export class Firework{
        this.particles.push(
          new Particle(this.x,this.y,
            Math.cos(angle)*6,
-           Math.sin(angle)*6)
+           Math.sin(angle)*6) as Particle
        );
      }
 
@@ -49,7 +51,7 @@ export class Firework{
        const y=13*Math.cos(t)-5*Math.cos(2*t);
 
        this.particles.push(
-         new Particle(this.x,this.y,x*0.3,-y*0.3)
+         new Particle(this.x,this.y,x*0.3,-y*0.3) as any
        );
      }
 
@@ -63,7 +65,7 @@ export class Firework{
        this.particles.push(
          new Particle(this.x,this.y,
            Math.cos(angle)*t*0.2,
-           Math.sin(angle)*t*0.2)
+           Math.sin(angle)*t*0.2) as Particle
        );
      }
 
@@ -72,12 +74,12 @@ export class Firework{
 
  update(){
 
-   this.particles.forEach(p=>p.update());
-   this.particles=this.particles.filter(p=>p.life>0);
+   this.particles.forEach((p: Particle) => p.update());
+   this.particles=this.particles.filter((p: Particle) => p.life>0);
  }
 
- render(ctx){
+ render(ctx: CanvasRenderingContext2D){
 
-   this.particles.forEach(p=>p.render(ctx));
+   this.particles.forEach((p: Particle) => p.render(ctx));
  }
 }

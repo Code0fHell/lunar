@@ -16,7 +16,7 @@ export class Particle {
    this.life-=0.01;
  }
 
- render(ctx){
+ render(ctx: CanvasRenderingContext2D){
 
    ctx.globalAlpha=this.life;
 
