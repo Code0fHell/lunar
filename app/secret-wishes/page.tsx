@@ -4,20 +4,28 @@ import { useEffect,useState } from "react";
 
 export default function Secret(){
 
- const [data,setData]=useState([]);
+ const [data,setData]=useState<any[]>([]);
 
  useEffect(()=>{
+
    fetch("/api/greetings")
-   .then(r=>r.json())
-   .then(setData);
+     .then(r=>r.json())
+     .then(res=>{
+       if(Array.isArray(res)){
+         setData(res)
+       }
+     });
+
  },[]);
 
  return(
 
-  <div>
+  <div className="p-10 text-white">
 
-    {data.map((w,i)=>(
-      <div key={i}>{w.message}</div>
+    {data.map((w)=>(
+      <div key={w.id} className="mb-2">
+        {w.message}
+      </div>
     ))}
 
   </div>
