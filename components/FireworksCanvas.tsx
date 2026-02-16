@@ -6,7 +6,8 @@ import { Engine } from "../engine/Engine";
 export default function FireworksCanvas(){
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const engineRef = useRef<Engine>();
+  const engineRef = useRef<Engine | null>(null);
+
 
   useEffect(()=>{
 
